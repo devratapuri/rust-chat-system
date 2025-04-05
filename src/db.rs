@@ -1,15 +1,16 @@
 use rocksdb::DB;
 use anyhow::Result;
+use std::sync::Arc;
 
 #[derive(Clone)]
 pub struct DBConnection {
-    db: DB,
+    db: Arc<DB>,
 }
 
 impl DBConnection {
     pub fn new() -> Self {
         let path = "chat_messages";
-        let db = DB::open_default(path).unwrap();
+        let db = Arc::new(DB::open_default(path).unwrap());
         DBConnection { db }
     }
 
