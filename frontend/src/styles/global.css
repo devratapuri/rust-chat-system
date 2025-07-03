@@ -1,0 +1,99 @@
+/* CSS Variables for Theming */
+:root {
+  --bg: #f0f4ff;
+  --bg-card: #fff;
+  --text: #222;
+  --text-muted: #888;
+  --primary: #4f8cff;
+  --primary-dark: #2563eb;
+  --input-bg: #f3f6fa;
+  --input-border: #ddd;
+  --bubble-mine: #4f8cff;
+  --bubble-other: #e0e7ff;
+  --bubble-mine-text: #fff;
+  --bubble-other-text: #222;
+  --nav-bg: #fff;
+  --nav-shadow: 0 2px 8px #0001;
+  --button-bg: linear-gradient(90deg, #4f8cff 0%, #6fc3ff 100%);
+  --button-bg-hover: linear-gradient(90deg, #2563eb 0%, #4f8cff 100%);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #181a20;
+    --bg-card: #23262f;
+    --text: #f1f1f1;
+    --text-muted: #888ca3;
+    --primary: #7aaaff;
+    --primary-dark: #4f8cff;
+    --input-bg: #23262f;
+    --input-border: #33374a;
+    --bubble-mine: #4f8cff;
+    --bubble-other: #23262f;
+    --bubble-mine-text: #fff;
+    --bubble-other-text: #f1f1f1;
+    --nav-bg: #23262f;
+    --nav-shadow: 0 2px 8px #0003;
+    --button-bg: linear-gradient(90deg, #4f8cff 0%, #7aaaff 100%);
+    --button-bg-hover: linear-gradient(90deg, #2563eb 0%, #4f8cff 100%);
+  }
+}
+
+/* Modern CSS Reset */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+body {
+  min-height: 100vh;
+  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  transition: background 0.3s, color 0.3s;
+}
+a { color: var(--primary); text-decoration: none; transition: color 0.2s; }
+a:hover { color: var(--primary-dark); }
+
+.card {
+  background: var(--bg-card);
+  border-radius: 14px;
+  box-shadow: 0 2px 16px #0001;
+  padding: 2rem;
+  margin: 2rem auto;
+  max-width: 420px;
+  transition: background 0.3s;
+}
+
+.form-input {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--input-border);
+  margin-bottom: 1rem;
+  font-size: 16px;
+  background: var(--input-bg);
+  color: var(--text);
+  transition: border 0.2s, background 0.3s, color 0.3s;
+}
+.form-input:focus {
+  border: 1.5px solid var(--primary);
+  outline: none;
+}
+
+.button {
+  background: var(--button-bg);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 22px;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.button:hover {
+  background: var(--button-bg-hover);
+}
+
+@media (max-width: 600px) {
+  .card { padding: 1rem; max-width: 98vw; }
+} 

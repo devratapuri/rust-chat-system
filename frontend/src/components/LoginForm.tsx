@@ -16,24 +16,24 @@ export default function LoginForm({ onLogin }: { onLogin: (email: string, passwo
   };
 
   return (
-    <form onSubmit={handleSubmit} style={{ maxWidth: 300, margin: '0 auto' }}>
-      <h2>Login</h2>
+    <form onSubmit={handleSubmit} style={{ maxWidth: 320, margin: '0 auto', textAlign: 'center' }}>
+      <h2 style={{ marginBottom: 16 }}>Login</h2>
       <input
         type="email"
         placeholder="Email"
         value={email}
         onChange={e => setEmail(e.target.value)}
-        style={{ width: '100%', marginBottom: 8 }}
+        className="form-input"
       />
       <input
         type="password"
         placeholder="Password"
         value={password}
         onChange={e => setPassword(e.target.value)}
-        style={{ width: '100%', marginBottom: 8 }}
+        className="form-input"
       />
       {error && <div style={{ color: 'red', marginBottom: 8 }}>{error}</div>}
-      <button type="submit" style={{ width: '100%' }}>Login</button>
+      <button type="submit" className="button" style={{ width: '100%' }}>Login</button>
     </form>
   );
 } 
