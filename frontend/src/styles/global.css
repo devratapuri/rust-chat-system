@@ -1,21 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
 /* CSS Variables for Theming */
 :root {
-  --bg: #f0f4ff;
-  --bg-card: #fff;
-  --text: #222;
-  --text-muted: #888;
-  --primary: #4f8cff;
-  --primary-dark: #2563eb;
-  --input-bg: #f3f6fa;
-  --input-border: #ddd;
-  --bubble-mine: #4f8cff;
-  --bubble-other: #e0e7ff;
+  --bg: #181a20;
+  --bg-card: rgba(35, 38, 47, 0.85);
+  --glass-blur: blur(18px);
+  --glass-border: 1.5px solid rgba(255,255,255,0.08);
+  --text: #f1f1f1;
+  --text-muted: #888ca3;
+  --primary: #7aaaff;
+  --primary-dark: #4f8cff;
+  --input-bg: rgba(35, 38, 47, 0.7);
+  --input-border: #33374a;
+  --bubble-mine: #4f8cffcc;
+  --bubble-other: #23262fcc;
   --bubble-mine-text: #fff;
-  --bubble-other-text: #222;
-  --nav-bg: #fff;
-  --nav-shadow: 0 2px 8px #0001;
-  --button-bg: linear-gradient(90deg, #4f8cff 0%, #6fc3ff 100%);
+  --bubble-other-text: #f1f1f1;
+  --nav-bg: rgba(35, 38, 47, 0.7);
+  --nav-shadow: 0 2px 16px #0006;
+  --button-bg: linear-gradient(90deg, #4f8cff 0%, #7aaaff 100%);
   --button-bg-hover: linear-gradient(90deg, #2563eb 0%, #4f8cff 100%);
+  --accent: #4f8cff;
+  --accent-gradient: linear-gradient(90deg, #4f8cff 0%, #7aaaff 100%);
+  --accent-glow: 0 0 16px #4f8cff88;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -42,8 +49,9 @@
 /* Modern CSS Reset */
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html, body { height: 100%; }
-body {
+body, #root {
   min-height: 100vh;
+  height: 100%;
   font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
   background: var(--bg);
   color: var(--text);
@@ -53,47 +61,171 @@ body {
 a { color: var(--primary); text-decoration: none; transition: color 0.2s; }
 a:hover { color: var(--primary-dark); }
 
+nav {
+  background: var(--nav-bg);
+  box-shadow: var(--nav-shadow);
+  padding: 0.5rem 0;
+  margin-bottom: 2rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  z-index: 10;
+  backdrop-filter: var(--glass-blur);
+  border-bottom: var(--glass-border);
+}
+nav .nav-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  justify-content: center;
+}
+nav a {
+  color: var(--primary);
+  font-weight: 600;
+  font-size: 1.1rem;
+  letter-spacing: 0.01em;
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+}
+nav a.active {
+  background: var(--accent-gradient);
+  color: #fff;
+  box-shadow: var(--accent-glow);
+}
+nav a:hover {
+  background: var(--accent-gradient);
+  color: #fff;
+  box-shadow: var(--accent-glow);
+}
+
+.main-center {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+}
+
 .card {
   background: var(--bg-card);
-  border-radius: 14px;
-  box-shadow: 0 2px 16px #0001;
-  padding: 2rem;
-  margin: 2rem auto;
+  border-radius: 22px;
+  box-shadow: 0 8px 40px #0008;
+  padding: 2.5rem 2rem 2rem 2rem;
   max-width: 420px;
-  transition: background 0.3s;
+  width: 100%;
+  position: relative;
+  animation: fadeInCard 0.7s cubic-bezier(.4,0,.2,1);
+  border: var(--glass-border);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  margin: 0;
+}
+.card .accent-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 6px;
+  background: var(--accent-gradient);
+  border-top-left-radius: 22px;
+  border-top-right-radius: 22px;
+  box-shadow: var(--accent-glow);
+}
+@keyframes fadeInCard {
+  from { opacity: 0; transform: translateY(30px) scale(0.98); }
+  to { opacity: 1; transform: none; }
 }
 
 .form-input {
   width: 100%;
-  padding: 10px 14px;
-  border-radius: 8px;
-  border: 1px solid var(--input-border);
-  margin-bottom: 1rem;
-  font-size: 16px;
+  padding: 12px 14px 12px 42px;
+  border-radius: 10px;
+  border: 1.5px solid var(--input-border);
+  margin-bottom: 1.2rem;
+  font-size: 17px;
   background: var(--input-bg);
   color: var(--text);
-  transition: border 0.2s, background 0.3s, color 0.3s;
+  transition: border 0.2s, background 0.3s, color 0.3s, box-shadow 0.2s;
+  position: relative;
+  box-shadow: 0 1px 4px #0002;
 }
 .form-input:focus {
   border: 1.5px solid var(--primary);
   outline: none;
+  box-shadow: 0 0 0 2px #4f8cff33;
+}
+.input-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--primary);
+  font-size: 1.2rem;
+  pointer-events: none;
 }
 
 .button {
   background: var(--button-bg);
   color: #fff;
   border: none;
-  border-radius: 8px;
-  padding: 10px 22px;
-  font-weight: 600;
-  font-size: 16px;
+  border-radius: 10px;
+  padding: 12px 22px;
+  font-weight: 700;
+  font-size: 17px;
   cursor: pointer;
-  transition: background 0.2s;
+  box-shadow: 0 2px 12px #4f8cff33;
+  transition: background 0.2s, box-shadow 0.2s, transform 0.1s;
+  margin-top: 0.2rem;
 }
 .button:hover {
   background: var(--button-bg-hover);
+  box-shadow: 0 4px 24px #4f8cff55;
+  transform: translateY(-2px) scale(1.03);
+}
+.button:active {
+  transform: scale(0.98);
+}
+
+.show-password-toggle {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--primary);
+  font-size: 1.1rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.footer {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin: 2rem 0 1rem 0;
+  letter-spacing: 0.01em;
+}
+
+.full-page-card {
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 @media (max-width: 600px) {
-  .card { padding: 1rem; max-width: 98vw; }
+  .main-center {
+    align-items: flex-start;
+    padding-top: 2rem;
+  }
+  .card {
+    margin: 1rem auto;
+    padding: 1.2rem 0.5rem 1rem 0.5rem;
+    max-width: 98vw;
+  }
+  nav .nav-inner { gap: 1rem; font-size: 1rem; }
 } 
